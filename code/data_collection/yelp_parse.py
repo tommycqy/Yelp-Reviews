@@ -1,7 +1,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import json
-from yelp_scraping import retrieve_url
+from yelp_scraping import retrieve_html
 
 
 def parse_api_response(api_response):
@@ -62,7 +62,7 @@ def extract_reviews(url, review_count):
 
     api_url = url + "%3Fstart%3D40"
 
-    html_obj = retrieve_url(url)
+    html_obj = retrieve_html(url)
 
     review_list = parse_page(html_obj)
 
@@ -74,7 +74,7 @@ def extract_reviews(url, review_count):
         curr_offset = i * 20
         curr_url = api_url + "&start=%d"%curr_offset
 
-        curr_page_reviews = parse_page(retrieve_url(curr_url)[1])
+        curr_page_reviews = parse_page(retrieve_html(curr_url)[1])
 
         result += curr_page_reviews
 

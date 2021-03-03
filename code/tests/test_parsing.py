@@ -1,19 +1,30 @@
 import unittest
-from pathlib import Path
+import pandas
 
-from code.yelp_parse import parse_api_response
-from code.yelp_scraping import all_restaurants
+from yelp_parse import parse_api_response
+from yelp_scraping import all_restaurants
 
-def read_api_key(filepath="key.txt"):
-    return Path(filepath).read_text().strip()
 
-class MyTestCase(unittest.TestCase):
+class TestApiResponse(unittest.TestCase):
     def test_api_response(self):
-        api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenfUf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
-        tacos = all_restaurants(api_key, params={"term":"taco","location":"University District,Seattle"})
+        api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
+                    'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
+                    '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
+        tacos = all_restaurants(api_key, params={"term":"taco",
+                    "location":"University District,Seattle", 
+                    "categories": "restaurants"})
         taco_restaurants_df = parse_api_response(tacos)
+        #Test the dataframe specs
         self.assertEqual(len(tacos), len(taco_restaurants_df))
-        self.assertEqual(len(df.columns), 8)
+        self.assertEqual(len(tacos), 156)
+        self.assertEqual(taco_restaurants_df.shape, (156,12))
+
+        #Test for a single row
+        Off_the_Rez = taco_restaurants_df.iloc[1]
+        self.assertEqual(Off_the_Rez['name'], 'Off the Rez')
+        self.assertEqual(Off_the_Rez['price'], '$')
+        self.assertEqual(Off_the_Rez['rating'], 4.0)
+        self.assertEqual(Off_the_Rez['category'], 'foodtrucks,burgers,tacos')
 
 
 if __name__ == '__main__':

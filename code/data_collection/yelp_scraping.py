@@ -1,5 +1,6 @@
 import requests
 import time
+import json
 
 def yelp_search(api_key, params):
     """
@@ -42,7 +43,7 @@ def all_restaurants(api_key, params):
     offset = 0
     result = []
 
-    for i in range(records_num):
+    for i in range(requests_num):
         #20 restaurants per request
         curr_offset = offset + i * 20
         params["offset"] = curr_offset
@@ -55,7 +56,7 @@ def all_restaurants(api_key, params):
 
 
 
-def retrieve_url(url):
+def retrieve_html(url):
     """
     Return the raw HTML for the specified URL
     """
