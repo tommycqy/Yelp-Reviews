@@ -1,7 +1,7 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import json
-from .yelp_scraping import retrieve_url
+from yelp_scraping import retrieve_url
 
 
 def parse_api_response(api_response):
