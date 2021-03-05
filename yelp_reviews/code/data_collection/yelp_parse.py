@@ -1,8 +1,17 @@
 import pandas as pd
 from bs4 import BeautifulSoup
 import json
-from yelp_scraping import retrieve_html
+import requests
 
+
+def retrieve_html(url):
+    """
+    Return the raw HTML for the specified URL
+    """
+
+    r = requests.get(url, auth = ("user", "pass"))
+
+    return (r.status_code, r.text)
 
 def parse_api_response(api_response):
 

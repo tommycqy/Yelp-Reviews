@@ -25,6 +25,7 @@ DOWNLOAD_URL = ""
 LICENSE = ""
 AUTHOR = "Tommy Chen | Emily | Sindhu"
 AUTHOR_EMAIL = ""
+PLATFORMS = ""
 VERSION = "__version__ 1.0"
 PACKAGE_DATA = {}
 REQUIRES = ["numpy", "pandas", "requests", "bs4", "nltk"]

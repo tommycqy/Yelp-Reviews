@@ -1,6 +1,7 @@
 import requests
-import time
 import json
+import time
+
 
 def yelp_search(api_key, params):
     """
@@ -56,11 +57,3 @@ def all_restaurants(api_key, params):
 
 
 
-def retrieve_html(url):
-    """
-    Return the raw HTML for the specified URL
-    """
-
-    r = requests.get(url, auth = ("user", "pass"))
-
-    return (r.status_code, r.text)
