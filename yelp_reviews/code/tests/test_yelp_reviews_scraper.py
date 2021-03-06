@@ -1,6 +1,5 @@
 import unittest
-from yelp_reviews.code.data_collection.yelp_scraping import yelp_search, all_restaurants
-
+from yelp_reviews.code.data_collection.reviews_scraper import *
 
 
 class MyTestCase(unittest.TestCase):
