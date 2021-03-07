@@ -9,5 +9,6 @@ python:
   - "3.9-dev"  # 3.9 development branch
   - "nightly"  # nightly build
 # command to run tests
+setup.py
 script:
   - pytest
