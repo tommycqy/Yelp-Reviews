@@ -1,6 +1,9 @@
 import requests
-import time
 import json
+import time
+import pandas as pd
+import csv
+
 
 def yelp_search(api_key, params):
     """
@@ -54,13 +57,40 @@ def all_restaurants(api_key, params):
 
     return result
 
+def parse_api_response(api_response):
 
-
-def retrieve_html(url):
     """
-    Return the raw HTML for the specified URL
+    Parse the API response into a Pandas DataFrame
+    API response is all of the restaurants matched from yelp_scraping
     """
 
-    r = requests.get(url, auth = ("user", "pass"))
+    df = pd.DataFrame(api_response)
+    category_list = []
 
-    return (r.status_code, r.text)
+    for i in range(len(df)):
+        cat_i = [cat["alias"] for cat in df["categories"][i]]
+        category_list.append(",".join(cat_i))
+
+    latitude = [coord.get("latitude") for coord in df["coordinates"]]
+    longitude = [coord.get("longitude") for coord in df["coordinates"]]
+
+    df["category"] = category_list
+    df["latitude"] = latitude
+    df["longitude"] = longitude
+
+    df_return = df.drop(columns = ["coordinates", "image_url", "is_closed", "categories", "location", "display_phone", "distance"])
+
+    return df_return
+
+
+def write_api_data():
+    api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
+                    'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
+                    '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
+    tacos = all_restaurants(api_key, params={"term":"taco",
+                "location":"University District,Seattle", 
+                "categories": "restaurants"})
+    taco_restaurants_df = parse_api_response(tacos)
+    taco_restaurants_df.to_csv('api_data.csv')
+
+#write_api_data()
