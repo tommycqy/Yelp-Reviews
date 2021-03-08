@@ -31,5 +31,5 @@ jobs:
         - pip install . 
       script:
         - python3 -m pytest
-        - pytest --pylint
-        - pytest --flake8
+        #- pytest --pylint
+        #- pytest --flake8
