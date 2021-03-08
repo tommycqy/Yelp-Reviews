@@ -9,8 +9,6 @@ jobs:
   include:
     - name: "Python on Linux"
       python:
-        - "3.4"
-        - "3.5"
         - "3.6"      # current default Python on Travis CI
         - "3.7"
         - "3.8"
@@ -23,7 +21,7 @@ jobs:
         - pip3 install -U pytest
         - pip3 install codecov
         - pip3 install bs4
-        - pip3 install lxml
+        #- pip3 install lxml
         - pip3 install pytest -pylint
         - pip3 install pytest -flake8
         #- pip3 install --user -r requirements.txt
