@@ -1,5 +1,5 @@
-import os
-from setuptools import setup, find_packages, find_namespace_packages
+from setuptools import setup, find_packages
+
 PACKAGES = find_packages()
 
 CLASSIFIERS = ["Development Status :: 3 - Alpha",
@@ -10,16 +10,9 @@ CLASSIFIERS = ["Development Status :: 3 - Alpha",
                "Programming Language :: Python",
                "Topic :: Scientific/Engineering"]
 
-# Description should be a one-liner:
-description = " "
-# Long description will go up on the pypi page
-long_description = """
-
-"""
 
 NAME = "Yelp Reviews"
-DESCRIPTION = description
-LONG_DESCRIPTION = long_description
+DESCRIPTION = "A data science project using Yelp Fusion API and Web Scraping"
 URL = ""
 DOWNLOAD_URL = ""
 LICENSE = ""
@@ -32,7 +25,6 @@ REQUIRES = ["numpy", "pandas", "requests", "bs4", "nltk"]
 
 opts = dict(name=NAME,
             description=DESCRIPTION,
-            long_description=LONG_DESCRIPTION,
             url=URL,
             download_url=DOWNLOAD_URL,
             license=LICENSE,
@@ -44,15 +36,6 @@ opts = dict(name=NAME,
             packages=PACKAGES,
             install_requires=REQUIRES,
             requires=REQUIRES)
-
-'''
-setup(
-    name = 'code',
-    version = '1.0',
-    packages = ['code', 'code.yelp_parse', 'code.yelp_scraping'],
-    package_data = {'code.yelp_parse':['code/yelp_parse.py'], 'code.yelp_scraping':['code/yelp_scraping.py']}
-)
-'''
 
 if __name__ == '__main__':
     setup(**opts)

@@ -5,6 +5,7 @@ from yelp_reviews.code.data_collection.api_data import *
 TEST_HTML_FILE_NAME = 'test.html'
 
 class MyTestCase(unittest.TestCase):
+
     def test_api_response(self):
         api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
                     'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
@@ -24,9 +25,6 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(Off_the_Rez['price'], '$')
         self.assertEqual(Off_the_Rez['rating'], 4.0)
         self.assertEqual(Off_the_Rez['category'], 'foodtrucks,burgers,tacos')
-
-    def test_parse_page(self):
-        self.assertIsInstance(parse_page(TEST_HTML_FILE_NAME), list, "is list")
 
 if __name__ == '__main__':
     unittest.main()
