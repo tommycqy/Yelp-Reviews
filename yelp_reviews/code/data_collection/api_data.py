@@ -35,7 +35,7 @@ def all_restaurants(api_key, params):
     """
 
     data1 = yelp_search(api_key, params)
-    records_num  = data1["total"]
+    records_num = data1["total"]
     requests_num = records_num // 20 + 1
     offset = 0
     result = []
@@ -48,7 +48,6 @@ def all_restaurants(api_key, params):
         result += data["businesses"]
         # Pause slightly between requests
         time.sleep(.300)
-
     return result
 
 def parse_api_response(api_response):
