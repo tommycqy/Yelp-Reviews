@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 import re
+from mapboxgl.utils import create_color_stops, df_to_geojson
+from mapboxgl.viz import CircleViz
 
 def get_map_df(df):
     """
@@ -52,3 +54,52 @@ def get_indicators(df, col_name):
         df[item] = contains_ser
 
     return df
+
+
+def get_filter_indicator_df(df, filter_col, col_list):
+    """
+    Filter indicator dataframe based on list of columns
+    Returns dataframe
+    """
+
+    df_indicator = get_indicators(df, filter_col)
+    df_filter = pd.DataFrame(columns = df_indicator.columns)
+
+    for col in col_list:
+
+        df_temp = df_indicator.loc[df_indicator[col] == 1]
+        df_filter = df_filter.append(df_temp)
+
+    return df_filter
+
+
+def get_viz(df):
+    """
+    Converts dataframe to geoJSON
+    Then renders to MapBox map
+    Returns: MapBox map
+    """
+
+    access_token = 'pk.eyJ1IjoiZW1pOTAiLCJhIjoiY2tsaG9penkxMmY1cTJ2czZyNmQ5c3I2MCJ9.AaHgMWQdOv-SwzWj_nYvDg'
+
+    rest_json = df_to_geojson(df.fillna(''),
+                              properties=['name', 'rating', 'price'],
+                              precision=4)
+
+    df_center = get_center(df)
+
+    category_color_stops = [['$', 'rgb(211,47,47)'],
+                            ['$$', 'rgb(81,45,168)'],
+                            ['$$$', 'rgb(2,136,209)'],
+                            ['$$$$', 'rgb(255,160,0)']]
+
+    viz = CircleViz(rest_json,
+                    access_token=access_token,
+                    label_property='name',
+                    color_property='price',
+                    color_function_type='match',
+                    color_stops=category_color_stops,
+                    center=df_center,
+                    zoom=13)
+
+    return viz
