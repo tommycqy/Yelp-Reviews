@@ -12,7 +12,7 @@ def nltk_download():
 
 # nltk_download()
 
-def read_all_reviews_csv(filename = 'yelp_reviews/data/reviews.csv'):
+def read_all_reviews(filename = 'yelp_reviews/data/reviews.csv'):
     """ Read CSV file that contains all reviews into a string
     
     Outputs:
@@ -25,7 +25,7 @@ def read_all_reviews_csv(filename = 'yelp_reviews/data/reviews.csv'):
     f.close()
     return text
 
-def seperate_all_reviews():
+def read_all_reviews_seperately():
     filename1 = 'yelp_reviews/data/reviews.csv'
     filename2 = 'yelp_reviews/data/reviewCountOnPage.csv'
 
@@ -42,9 +42,20 @@ def seperate_all_reviews():
         L = []
         for row in reader:
             L += row
-        f1.close
-
+        f1.close()
     return (reviewCounts, L)
+
+def get_latest_reviews():
+    (reviewCounts, L) = read_all_reviews_seperately()
+    newest_review_list = []
+    for reviewCount in reviewCounts:
+        index = 0
+        if reviewCount == 0:
+            newest_review_list.append('')
+        else:
+            newest_review_list.append(L[index])
+            index += reviewCount
+    return newest_review_list
 
 def preprocess(text, stopwords={}, lemmatizer=nltk.stem.wordnet.WordNetLemmatizer()):
     """ Normalizes case and handles punctuation
@@ -147,7 +158,7 @@ def get_rare_words(dist):
 
 
 def plot():
-    text = read_all_reviews_csv()
+    text = read_all_reviews()
     extra_stopwords=set()
     stopwords = set(nltk.corpus.stopwords.words('english')) | set(["http", "co", "rt", "amp"]) | extra_stopwords
     tokens = preprocess(text, stopwords)
