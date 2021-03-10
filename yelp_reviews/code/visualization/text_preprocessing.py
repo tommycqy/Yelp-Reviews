@@ -10,9 +10,9 @@ def nltk_download():
     nltk.download('wordnet')
     nltk.download('punkt')
 
-nltk_download()
+# nltk_download()
 
-def read_csv(filename = 'yelp_reviews/reviews.csv'):
+def read_all_reviews_csv(filename = 'yelp_reviews/data/reviews.csv'):
     """ Read CSV file that contains all reviews into a string
     
     Outputs:
@@ -25,6 +25,26 @@ def read_csv(filename = 'yelp_reviews/reviews.csv'):
     f.close()
     return text
 
+def seperate_all_reviews():
+    filename1 = 'yelp_reviews/data/reviews.csv'
+    filename2 = 'yelp_reviews/data/reviewCountOnPage.csv'
+
+    with open(filename2, 'r') as f2:
+        reader = csv.reader(f2) 
+        reviewCount_list = []
+        for row in reader:
+            reviewCount_list += row
+    f2.close()
+    reviewCounts = map(int, reviewCount_list)
+
+    with open(filename1, 'r') as f1:
+        reader = csv.reader(f1)
+        L = []
+        for row in reader:
+            L += row
+        f1.close
+
+    return (reviewCounts, L)
 
 def preprocess(text, stopwords={}, lemmatizer=nltk.stem.wordnet.WordNetLemmatizer()):
     """ Normalizes case and handles punctuation
@@ -47,9 +67,7 @@ def preprocess(text, stopwords={}, lemmatizer=nltk.stem.wordnet.WordNetLemmatize
     #remove "'s" and apostrophe
     text = re.sub("'s", "", text)
     text = re.sub("'", "",text)
-    
-    #print(text)
-    
+
     #calling tokenize to create a token list
     tokens = nltk.word_tokenize(text)
     
@@ -62,9 +80,6 @@ def preprocess(text, stopwords={}, lemmatizer=nltk.stem.wordnet.WordNetLemmatize
             continue
         else:
             filtered_tokens.append(token)
-        
-    #print("......\n")
-    #print(filtered_tokens)
     
     #break the tokens
     break_list = []
@@ -132,7 +147,7 @@ def get_rare_words(dist):
 
 
 def plot():
-    text = read_csv()
+    text = read_all_reviews_csv()
     extra_stopwords=set()
     stopwords = set(nltk.corpus.stopwords.words('english')) | set(["http", "co", "rt", "amp"]) | extra_stopwords
     tokens = preprocess(text, stopwords)
@@ -144,7 +159,7 @@ def plot():
     rare_words_set = get_rare_words(distribution)
     print(len(rare_words_set))
 
-plot()
+# plot()
 
 
 
