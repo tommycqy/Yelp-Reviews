@@ -52,7 +52,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(test_reviews),20)
 
         #Parse Instance
-        self.assertIsInstance(parse_page('tests/test.html'), list, "is list")
+        self.assertIsInstance(parse_page('tests/data/test.html'), list, "is list")
 
 
 
