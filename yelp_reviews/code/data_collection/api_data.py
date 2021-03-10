@@ -1,7 +1,12 @@
+from typing import List, Any
+
 import requests
 import json
 import time
 import pandas as pd
+import os
+from pathlib import Path
+import yelp_reviews
 
 
 def yelp_search(api_key, params):
@@ -71,14 +76,20 @@ def parse_api_response(api_response):
     return df_return
 
 
-def write_api_data():
+def write_api_data(params, fileName = 'api_data.csv'):
+    """
+    Write api data to pandas dataFrame and write to .csv file
+    Default: filename as 'api_data.csv'
+    File will be saved in separate 'Data' folder
+    """
+
     api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
                     'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
                     '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
-    tacos = all_restaurants(api_key, params={"term":"taco", 
-                "location":"University District,Seattle", 
-                "categories": "restaurants"})
-    taco_restaurants_df = parse_api_response(tacos)
-    taco_restaurants_df.to_csv('api_data.csv')
+    dir_path = os.path.join(os.path.dirname(yelp_reviews.__file__),"data")
+    file_path = os.path.join(dir_path, fileName)
+    api_response = all_restaurants(api_key, params=params)
+    restaurants_df = parse_api_response(api_response)
+    restaurants_df.to_csv(file_path)
 
-# write_api_data()
+    return file_path

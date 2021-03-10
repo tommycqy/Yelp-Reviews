@@ -4,23 +4,25 @@ import json
 import requests
 import csv
 
-API_KEY = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
-            'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
-            '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
+API_KEY = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf' \
+          'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo' \
+          '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
+
 
 def retrieve_html(url):
     """
     Return the raw HTML for the specified URL
     """
-    r = requests.get(url, auth = ("user", "pass"))
+    r = requests.get(url, auth=("user", "pass"))
     return (r.status_code, r.text)
+
 
 def parse_page(html):
     """
     Parse the reviews on a single page of a restaurant
     """
     soup = BeautifulSoup(html, "html.parser")
-    review_soups = soup.find_all("script", type = "application/ld+json")
+    review_soups = soup.find_all("script", type="application/ld+json")
 
     description_list = []
     for soup in review_soups:
@@ -45,6 +47,7 @@ def extract_reviews(url):
     newest_20_reviews = parse_page(html_obj)
     return newest_20_reviews
 
+
 def extract_all_restaurants_reviews(search_params):
     """
     Retrieve all of the reviews for interested businesses on Yelp.com
@@ -60,14 +63,15 @@ def extract_all_restaurants_reviews(search_params):
         result += extract_reviews(url)
     return result
 
+
 def write_data():
-    search_params={"term":"taco","location":"University District,Seattle", 
-                "categories": "restaurants"}
+    search_params = {"term": "taco", "location": "University District,Seattle",
+                     "categories": "restaurants"}
     result = extract_all_restaurants_reviews(search_params)
-  
+
     # Opening the csv file in 'w' mode, write rows
     with open('reviews.csv', 'w') as f:
-        writer = csv.writer(f) 
+        writer = csv.writer(f)
         writer.writerow(result)
         f.close()
 
