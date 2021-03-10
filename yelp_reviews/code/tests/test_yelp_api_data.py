@@ -5,9 +5,9 @@ import pandas
 from bs4 import BeautifulSoup
 from yelp_reviews.code.data_collection.api_data import *
 from yelp_reviews.code.data_collection.reviews_scraper import *
-api_path = glob.glob('./test_data/api_key.txt')
+api_path = glob.glob('./data/api_key.txt')
 api_full_path = os.path.abspath(api_path[0])
-params_path=glob.glob('./test_data/params.txt')
+params_path=glob.glob('./data/params.txt')
 params_full_path = os.path.abspath(params_path[0])
 
 '''
@@ -42,13 +42,13 @@ class MyTestCase(unittest.TestCase):
             Scope: If we want to check for any other cases , need to change the url as test data needed is hardcoded.
         """
         # to get data from the url file
-        url_path = glob.glob('./test_data/url.txt')
+        url_path = glob.glob('./data/url.txt')
         url_full_path = os.path.abspath(url_path[0])
         with open(url_full_path, 'r') as file:
             for line in file:
                 url_name = line
         # To get the data from dataframe file
-        df_path = glob.glob('./test_data/dataframe.txt')
+        df_path = glob.glob('./data/dataframe.txt')
         df_full_path = os.path.abspath(df_path[0])
         df_list=[]
         with open(df_full_path, 'r') as file:
@@ -82,7 +82,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(test_reviews),20)
 
         #Parse Instance
-        self.assertIsInstance(parse_page('tests/test_data/test.html'), list, "is list")
+        self.assertIsInstance(parse_page('tests/data/test.html'), list, "is list")
 
 
 
