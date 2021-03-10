@@ -30,6 +30,6 @@ jobs:
       install:
         - pip install . 
       script:
-        - python3 -m pytest yelp_reviews/tests/*
+        - python3 -m pytest yelp_reviews/code/tests/*
         #- pytest --pylint
         #- pytest --flake8
