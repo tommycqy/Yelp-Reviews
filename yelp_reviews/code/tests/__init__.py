@@ -7,7 +7,8 @@ from yelp_reviews.code.data_collection.api_data import (
 from yelp_reviews.code.data_collection.reviews_scraper import (
     retrieve_html,
     extract_reviews,
-    extract_all_restaurants_reviews
+    extract_all_restaurants_reviews,
+    parse_page
 )
 
 from yelp_reviews.code.visualization.map_functions import (
