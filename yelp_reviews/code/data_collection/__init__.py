@@ -1,7 +1,8 @@
 from yelp_reviews.code.data_collection.api_data import (
     yelp_search,
     all_restaurants,
-    write_api_data,
+    parse_api_response,
+    write_api_data
 )
 from yelp_reviews.code.data_collection.reviews_scraper import (
     retrieve_html,

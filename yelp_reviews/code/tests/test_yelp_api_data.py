@@ -1,7 +1,7 @@
 import unittest
 import pandas
 from bs4 import BeautifulSoup
-from yelp_reviews import extract_reviews
+from yelp_reviews import parse_api_response
 from yelp_reviews.code.data_collection.reviews_scraper import *
 
 api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
