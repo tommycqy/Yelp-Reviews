@@ -1,14 +1,30 @@
 import unittest
+import os
+import glob
 import pandas
 from bs4 import BeautifulSoup
-from yelp_reviews import parse_api_response, all_restaurants, parse_page, extract_reviews
+from yelp_reviews.code.data_collection.api_data import *
+from yelp_reviews.code.data_collection.reviews_scraper import *
+api_path = glob.glob('./test_data/api_key.txt')
+api_full_path = os.path.abspath(api_path[0])
+params_path=glob.glob('./test_data/params.txt')
+params_full_path = os.path.abspath(params_path[0])
 
-api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
-                    'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
-                    '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
-params={"term":"taco",
-                    "location":"University District,Seattle",
-                    "categories": "restaurants"}
+'''
+placed globally as these are used by both functions
+using data from the file to test.
+scope: If needed to test for other cases , should change the file.
+'''
+with open(api_full_path,'r') as file:
+    for line in file:
+        api_key=line
+
+params_list=[]
+with open(params_full_path,'r') as file:
+    for line in file:
+        params_list.append(line.strip())
+params={"term":params_list[0],"location":params_list[1],"categories":params_list[2]}
+
 class MyTestCase(unittest.TestCase):
     def test_api_response(self):
         """
@@ -25,14 +41,29 @@ class MyTestCase(unittest.TestCase):
             Using a particular restaurant url to check if all the rows in the dataframe are correct:
             Scope: If we want to check for any other cases , need to change the url as test data needed is hardcoded.
         """
+        # to get data from the url file
+        url_path = glob.glob('./test_data/url.txt')
+        url_full_path = os.path.abspath(url_path[0])
+        with open(url_full_path, 'r') as file:
+            for line in file:
+                url_name = line
+        # To get the data from dataframe file
+        df_path = glob.glob('./test_data/dataframe.txt')
+        df_full_path = os.path.abspath(df_path[0])
+        df_list=[]
+        with open(df_full_path, 'r') as file:
+            for line in file:
+                df_list.append(line.strip())
 
-        url_name ='https://www.yelp.com/biz/tnt-taqueria-seattle?adjust_creative=Yd84IPqpgzteXDQ2QE83uA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Yd84IPqpgzteXDQ2QE83uA'
+        #url_name ='https://www.yelp.com/biz/tnt-taqueria-seattle?adjust_creative=Yd84IPqpgzteXDQ2QE83uA&utm_campaign=yelp_api_v3&utm_medium=api_v3_business_search&utm_source=Yd84IPqpgzteXDQ2QE83uA'
         TNT_Taqueria=taco_restaurants_df.loc[taco_restaurants_df['url'] == url_name]
+        rating_value=df_list[2]
 
-        self.assertEqual(TNT_Taqueria.iloc[0]['name'],'TNT Taqueria')
-        self.assertEqual(TNT_Taqueria.iloc[0]['price'], '$')
-        self.assertEqual(TNT_Taqueria.iloc[0]['rating'], 4.0)
-        self.assertEqual(TNT_Taqueria.iloc[0]['category'], 'mexican')
+
+        self.assertEqual(TNT_Taqueria.iloc[0]['name'],df_list[0])
+        self.assertEqual(TNT_Taqueria.iloc[0]['price'], df_list[1])
+        self.assertEqual(TNT_Taqueria.iloc[0]['rating'], int(rating_value))
+        self.assertEqual(TNT_Taqueria.iloc[0]['category'], df_list[3])
 
 
 
@@ -51,7 +82,7 @@ class MyTestCase(unittest.TestCase):
         self.assertEqual(len(test_reviews),20)
 
         #Parse Instance
-        self.assertIsInstance(parse_page('tests/data/test.html'), list, "is list")
+        self.assertIsInstance(parse_page('tests/test_data/test.html'), list, "is list")
 
 
 
