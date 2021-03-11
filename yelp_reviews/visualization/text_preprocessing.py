@@ -12,13 +12,13 @@ def nltk_download():
 
 # nltk_download()
 
-def read_all_reviews(filename = 'yelp_reviews/data/reviews.csv'):
+def read_all_reviews(filename = '../data/reviews.csv'):
     """ Read CSV file that contains all reviews into a string
     
     Outputs:
         text(string)
     """
-    with open(filename, 'r') as f:
+    with open(filename, 'r', encoding= 'utf-8') as f:
         reader = csv.reader(f) 
         for row in reader:
             text = ','.join(row) 
@@ -26,10 +26,10 @@ def read_all_reviews(filename = 'yelp_reviews/data/reviews.csv'):
     return text
 
 def read_all_reviews_seperately():
-    filename1 = 'yelp_reviews/data/reviews.csv'
-    filename2 = 'yelp_reviews/data/reviewCountOnPage.csv'
+    filename1 = '../data/reviews.csv'
+    filename2 = '../data/reviewCountOnPage.csv'
 
-    with open(filename2, 'r') as f2:
+    with open(filename2, 'r', encoding= 'utf-8') as f2:
         reader = csv.reader(f2) 
         reviewCount_list = []
         for row in reader:
@@ -37,7 +37,7 @@ def read_all_reviews_seperately():
     f2.close()
     reviewCounts = map(int, reviewCount_list)
 
-    with open(filename1, 'r') as f1:
+    with open(filename1, 'r', encoding= 'utf-8') as f1:
         reader = csv.reader(f1)
         L = []
         for row in reader:
