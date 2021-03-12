@@ -8,6 +8,8 @@ import os
 from pathlib import Path
 import yelp_reviews
 
+DIR_PATH = str(Path(os.getcwd()))
+API_KEY = Path(os.path.join(DIR_PATH, "yelp_reviews", "api_key.txt")).read_text()
 
 def yelp_search(api_key, params):
     """
@@ -82,13 +84,9 @@ def write_api_data(params, fileName = 'api_data.csv'):
     Default: filename as 'api_data.csv'
     File will be saved in separate 'Data' folder
     """
-
-    api_key = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf'\
-                    'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo'\
-                    '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
     dir_path = os.path.join(str(Path(os.path.dirname(yelp_reviews.__file__)).parents[0]),"data")
     file_path = os.path.join(dir_path, fileName)
-    api_response = all_restaurants(api_key, params=params)
+    api_response = all_restaurants(API_KEY, params=params)
     restaurants_df = parse_api_response(api_response)
     restaurants_df.to_csv(file_path)
 
