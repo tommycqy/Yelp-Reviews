@@ -5,9 +5,9 @@ import requests
 import csv
 
 
-API_KEY = 'Y0vpAcCzpLY3l5VSChBzAcRpy-JrWmmaOenf' \
-          'Uf-AGrC4lKtc79YDH503ZZSURFVGsAx_I1-Xo' \
-          '0T6YykBPmaOalvnGubVhpIH_K0kfIcWEh0FLftyNyUQ75MXaW0wYHYx'
+DIR_PATH = str(Path(os.getcwd()))
+API_KEY = Path(os.path.join(DIR_PATH, "yelp_reviews", 
+                            "api_key.txt")).read_text()
 
 
 def retrieve_html(url):

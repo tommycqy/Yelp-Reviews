@@ -6,8 +6,9 @@ import os
 from pathlib import Path
 import yelp_reviews
 
-DIR_PATH = str(Path(os.getcwd()).parents[0])
-API_KEY = Path(os.path.join(DIR_PATH, "yelp_reviews", "api_key.txt")).read_text()
+DIR_PATH = str(Path(os.getcwd()))
+API_KEY = Path(os.path.join(DIR_PATH, "yelp_reviews", 
+                                "api_key.txt")).read_text()
 
 def yelp_search(api_key, params):
     """
