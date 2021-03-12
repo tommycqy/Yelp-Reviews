@@ -4,7 +4,9 @@ import re
 from mapboxgl.utils import create_color_stops, df_to_geojson
 from mapboxgl.viz import CircleViz
 
-def get_map_df(df):
+
+
+def get_map_df(write_api = False, **params):
     """
     Prepares dataframe output from api_data.py for
     reading to mapbox function
