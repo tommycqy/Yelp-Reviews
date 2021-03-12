@@ -1,5 +1,7 @@
 beautifulsoup4==4.9.3
 flake8==3.7.9
+mapboxgl==0.10.2
+matplotlib==3.3.2
 nltk==3.5
 numpy==1.20.1
 pandas==1.2.2
