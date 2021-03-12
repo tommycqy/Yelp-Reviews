@@ -18,7 +18,8 @@ DIR_PATH = str(Path(os.getcwd()))
 DATA_FOLDER = "yelp_reviews/tests/data"
 API_KEY = Path(os.path.join(DIR_PATH, DATA_FOLDER, "api_key.txt")).read_text()
 URL_PATH = Path(os.path.join(DIR_PATH, DATA_FOLDER, "url.txt"))
-HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data", "test1.html"))
+HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data", 
+                                "test1.html"))
 
 class WebScraperTestCase(unittest.TestCase):
     def test_scrape_page(self):
