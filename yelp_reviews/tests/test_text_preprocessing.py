@@ -29,11 +29,11 @@ class TextPreprocssingTestCase(unittest.TestCase):
 
         # Read Reviews Seperately Test Case
         test_reviews = Path(os.path.join(DIR_PATH, DATA_FOLDER,
-                            "test_reviews.csv"))
+                                         "test_reviews.csv"))
         test_reviewCount = Path(os.path.join(DIR_PATH, DATA_FOLDER,
-                            "test_reviewCount.csv"))
+                                             "test_reviewCount.csv"))
         (m1, L2) = read_all_reviews_seperately(test_reviews, test_reviewCount)
-        self.assertEqual(list(m1), [2,1,1,1])
+        self.assertEqual(list(m1), [2, 1, 1, 1])
         self.assertEqual(len(L2), 5)
 
         # Preprocess Test Cases
@@ -52,8 +52,9 @@ class TextPreprocssingTestCase(unittest.TestCase):
 
         # Long sentence Test Case
         long_review = L2[4]
-        long_output = ['rt', 'gopconvention', 'oregon', 'vote', 'today', 'that',
-                       'mean', '62', 'day', 'until', 'the', 'gopconvention']
+        long_output = ['rt', 'gopconvention', 'oregon', 'vote', 'today',
+                       'that', 'mean', '62', 'day', 'until', 'the',
+                       'gopconvention']
         self.assertEqual(preprocess(long_review), long_output)
 
         # Get Latest Reviews Test Case
@@ -62,7 +63,7 @@ class TextPreprocssingTestCase(unittest.TestCase):
         self.assertEqual(latest_reviews[1], 'word-of-mouth self-esteem')
 
         # Get Rare Words Test Case
-        test_tokens = ['a','a','b','b','b','c','c','d','e','f']
+        test_tokens = ['a', 'a', 'b', 'b', 'b', 'c', 'c', 'd', 'e', 'f']
         rare_token_set = {'d', 'f', 'e'}
         self.assertEqual(get_rare_words(test_tokens), rare_token_set)
 

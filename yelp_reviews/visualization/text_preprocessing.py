@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 
 
 def nltk_download():
-    """ 
+    """
     Run nltk_download() if nltk doesn't install the above packages
     """
     nltk.download('stopwords')
@@ -22,31 +22,31 @@ def read_all_reviews(filepath):
     Returns:
         text (string)
     """
-    with open(filepath, 'r', encoding= 'utf-8') as f:
+    with open(filepath, 'r', encoding='utf-8') as f:
         reader = csv.reader(f)
         L = []
         for row in reader:
             L += row
     f.close()
-    text = ','.join(L) 
+    text = ','.join(L)
     return text
 
 
 def read_all_reviews_seperately(filename1, filename2):
-    """ 
+    """
     Read all the reviews and the reviewCount for each restaurant
     Returns:
         Tuple(reviewCount for each restaurant, list of all reviews)
     """
-    with open(filename2, 'r', encoding= 'utf-8') as f2:
-        reader = csv.reader(f2) 
+    with open(filename2, 'r', encoding='utf-8') as f2:
+        reader = csv.reader(f2)
         reviewCount_list = []
         for row in reader:
             reviewCount_list += row
     f2.close()
     reviewCounts = map(int, reviewCount_list)
 
-    with open(filename1, 'r', encoding= 'utf-8') as f1:
+    with open(filename1, 'r', encoding='utf-8') as f1:
         reader = csv.reader(f1)
         L = []
         for row in reader:
@@ -56,7 +56,7 @@ def read_all_reviews_seperately(filename1, filename2):
 
 
 def get_latest_reviews(f1, f2):
-    """ 
+    """
     Get the latest single review for each restaurant
     Returns:
         List of latest single review for each restaurant
@@ -75,12 +75,13 @@ def get_latest_reviews(f1, f2):
 
 def preprocess(text, stopwords={},
                lemmatizer=nltk.stem.wordnet.WordNetLemmatizer()):
-    """ 
+    """
     Normalizes case and handles punctuation
     args:
         text: str -- raw text
         stopwords : Set[str] -- lemmatized tokens to exclude from the output
-        lemmatizer : Lemmatizer -- an instance of a class implementing the lemmatize() method
+        lemmatizer : Lemmatizer -- 
+            an instance of a class implementing the lemmatize() method
     Returns:
         list(str): tokenized text
     """
@@ -91,14 +92,14 @@ def preprocess(text, stopwords={},
     text = re.sub(r'https:\/\/t.co/\w\w\w\w\w\w\w\w\w\w', " ", text)
     # Remove "'s" and apostrophe
     text = re.sub("'s", "", text)
-    text = re.sub("'", "",text)
+    text = re.sub("'", "", text)
     # Calling nltk.tokenize to create a token list
     tokens = nltk.word_tokenize(text)
 
     filtered_tokens = []
     for i in range(len(tokens)):
         token = tokens[i]
-            # Remove all punctuations
+        # Remove all punctuations
         if token in string.punctuation:
             continue
         else:
@@ -109,7 +110,8 @@ def preprocess(text, stopwords={},
     for i in range(len(filtered_tokens)):
         append_bool = False
         token = filtered_tokens[i]
-        # Break tokens at all characters that are not in string.ascii_letters or string.digits
+        # Break tokens at all characters that are 
+        # not in string.ascii_letters or string.digits
         for c in token:
             if (c in string.ascii_letters) or (c in string.digits):
                 continue
@@ -121,9 +123,10 @@ def preprocess(text, stopwords={},
     if break_list != []:
         for break_token in break_list:
             break_index = filtered_tokens.index(break_token)
-            insert_string_list = re.split('[^\d | ^a-zA-Z]', break_token)
+            b = break_index
+            insert_string_list = re.split(r'[^\d | ^a-zA-Z]', break_token)
             insert_string_list = [x for x in insert_string_list if x != ""]
-            filtered_tokens[break_index: break_index+1] = tuple(insert_string_list)
+            filtered_tokens[b: b+1] = tuple(insert_string_list)
 
     # Lemmatize and then remove stopwords
     result = []
@@ -131,9 +134,10 @@ def preprocess(text, stopwords={},
         new_token = lemmatizer.lemmatize(token)
         if new_token in stopwords:
             continue
-        else: 
+        else:
             result.append(new_token)
     return result
+
 
 def get_rare_words(tokens):
     """
@@ -152,8 +156,9 @@ def get_rare_words(tokens):
 
 def plot():
     text = read_all_reviews()
-    extra_stopwords=set()
-    stopwords = set(nltk.corpus.stopwords.words('english')) | set(["http", "co", "rt", "amp"]) | extra_stopwords
+    extra_stopwords = set()
+    SW = set(nltk.corpus.stopwords.words('english'))
+    stopwords = SW | set(["http", "co", "rt", "amp"]) | extra_stopwords
     tokens = preprocess(text, stopwords)
     distribution = collections.Counter(tokens)
     plt.hist(distribution.values(), bins=100)
@@ -164,6 +169,3 @@ def plot():
     print(len(rare_words_set))
 
 # plot()
-
-
-
