@@ -1,6 +1,5 @@
 import unittest
 import os
-import pandas
 from pathlib import Path
 from yelp_reviews.visualization.text_preprocessing import(
     read_all_reviews,

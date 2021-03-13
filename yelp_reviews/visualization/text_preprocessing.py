@@ -14,6 +14,7 @@ def nltk_download():
     nltk.download('wordnet')
     nltk.download('punkt')
 
+nltk_download()
 
 def read_all_reviews(filepath):
     """ 
