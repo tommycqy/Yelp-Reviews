@@ -10,13 +10,6 @@ from yelp_reviews.data_collection.reviews_scraper import (
     extract_all_restaurants_reviews
 )
 
-from yelp_reviews.visualization.text_preprocessing import(
-    get_latest_reviews,
-    preprocess,
-    get_distribution,
-    plot
-)
-
 from yelp_reviews.visualization.map_functions import (
     get_center,
     get_map_df,

@@ -11,9 +11,11 @@ from yelp_reviews.data_collection.reviews_scraper import (
 )
 
 from yelp_reviews.visualization.text_preprocessing import(
+    read_all_reviews,
+    read_all_reviews_seperately,
     get_latest_reviews,
     preprocess,
-    get_distribution,
+    get_rare_words,
     plot
 )
 
