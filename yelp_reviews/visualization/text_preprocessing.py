@@ -115,9 +115,9 @@ def preprocess(text, stopwords={},
         # Break tokens at all characters that are
         # not in string.ascii_letters or string.digits
         for c in token:
-            if (c in string.ascii_letters):
+            if c in string.ascii_letters:
                 continue
-            elif (c in string.digits):
+            elif c in string.digits:
                 continue
             else:
                 append_bool = True

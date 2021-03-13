@@ -38,7 +38,6 @@ class APIDataTestCase(unittest.TestCase):
         # Yelp Search Test Case
         data = yelp_search(API_KEY, params)
         total = data['total']
-        businesses = data['businesses']
         self.assertEqual(total, 156)
 
         # All Restaurants Test Case
