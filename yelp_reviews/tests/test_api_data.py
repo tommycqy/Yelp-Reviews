@@ -40,9 +40,6 @@ class APIDataTestCase(unittest.TestCase):
         total = data['total']
         businesses = data['businesses']
         self.assertEqual(total, 156)
-        test_business = businesses[6]
-        self.assertEqual(test_business['name'],
-                         'El Camion')
 
         # All Restaurants Test Case
         tacos = all_restaurants(API_KEY, params)
