@@ -55,7 +55,7 @@ class APIDataTestCase(unittest.TestCase):
         """
         with open(URL_PATH, 'r') as file:
             for line in file:
-                url = line
+                url = line.strip()
         df_list = []
         with open(DF_PATH, 'r') as file:
             for line in file:
