@@ -6,10 +6,6 @@ import os
 from pathlib import Path
 import yelp_reviews
 
-DIR_PATH = str(Path(os.getcwd()))
-API_KEY = Path(os.path.join(DIR_PATH, "yelp_reviews", 
-                                "api_key.txt")).read_text()
-
 def yelp_search(api_key, params):
     """
     Makes an authenticated request to the Yelp API
@@ -39,9 +35,8 @@ def all_restaurants(api_key, params):
     Returns the API response as a list of dictionaries
     Max number of responses is 1000
     """
-
-    data1 = yelp_search(api_key, params)
-    records_num = data1["total"]
+    initial_search = yelp_search(api_key, params)
+    records_num = initial_search["total"]
     requests_num = records_num // 20 + 1
     offset = 0
     result = []
@@ -71,13 +66,14 @@ def parse_api_response(api_response):
     df["category"] = category_list
     df["latitude"] = latitude
     df["longitude"] = longitude
-    df_return = df.drop(columns = ["coordinates", "image_url", "is_closed", "categories", 
+    df_return = df.drop(columns = ["coordinates", "image_url", 
+                                    "is_closed", "categories", 
                                     "location", "display_phone", "distance"])
 
     return df_return
 
 
-def write_api_data(params, fileName = 'api_data.csv'):
+def write_api_data(api_key, params, fileName = 'api_data.csv'):
     """
     Write api data to pandas dataFrame and write to .csv file
     Default: filename as 'api_data.csv'
@@ -85,7 +81,7 @@ def write_api_data(params, fileName = 'api_data.csv'):
     """
     dir_path = os.path.join(str(Path(os.path.dirname(yelp_reviews.__file__)).parents[0]),"data")
     file_path = os.path.join(dir_path, fileName)
-    api_response = all_restaurants(API_KEY, params=params)
+    api_response = all_restaurants(api_key, params=params)
     restaurants_df = parse_api_response(api_response)
     restaurants_df.to_csv(file_path)
 

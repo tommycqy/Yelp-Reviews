@@ -4,16 +4,18 @@ import re
 from mapboxgl.utils import create_color_stops, df_to_geojson
 from mapboxgl.viz import CircleViz
 
-
-
-def get_map_df(write_api = False, **params):
+def get_map_df(file_path, params, from_api = False):
     """
-    Prepares dataframe output from api_data.py for
-    reading to mapbox function
+    Prepares the dataframe for the map, either from api or from csv
+    Changes the latitude and longitude column name
     """
+    if from_api:
+        api_key = read_api_key()
+        df = write_api_data(api_key, params)
+    else:  
+        df = pd.read_csv(file_path)
     df = df.rename(columns={"latitude": "lat", "longitude": "lon"})
     df["name"] = df["name"].str.replace("'", "")
-
     return df
 
 

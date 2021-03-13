@@ -5,11 +5,6 @@ import requests
 import csv
 
 
-DIR_PATH = str(Path(os.getcwd()))
-API_KEY = Path(os.path.join(DIR_PATH, "yelp_reviews", 
-                            "api_key.txt")).read_text()
-
-
 def retrieve_html(url):
     """
     Return the raw HTML for the specified URL
@@ -49,12 +44,12 @@ def extract_reviews(url):
     return newest_20_reviews
 
 
-def extract_all_restaurants_reviews(search_params):
+def extract_all_restaurants_reviews(api_key, search_params):
     """
     Retrieve all of the reviews for interested businesses on Yelp.com
     Returns: (all_reviews (list): list of reviews, reviewCount_list (list))
     """
-    restaurants = all_restaurants(API_KEY, search_params)
+    restaurants = all_restaurants(api_key, search_params)
     restaurants_df = parse_api_response(restaurants)
     num_of_restaurants = len(restaurants)
     restaurant_url_list = restaurants_df['url'].tolist()
@@ -68,10 +63,11 @@ def extract_all_restaurants_reviews(search_params):
     return (all_reviews, reviewCount_list)
 
 
-def write_data():
+def write_data(api_key):
     search_params={"term":"taco","location":"University District,Seattle", 
                 "categories": "restaurants"}
-    (all_reviews, reviewCount_list) = extract_all_restaurants_reviews(search_params)
+    (all_reviews, reviewCount_list) = extract_all_restaurants_reviews(api_key,
+                                                                search_params)
   
     # Opening the csv file in 'w' mode, write rows
     with open('./data/reviews.csv', 'w') as f:
@@ -84,4 +80,3 @@ def write_data():
         writer.writerow(reviewCount_list)
         f.close()
 
-# write_data()
