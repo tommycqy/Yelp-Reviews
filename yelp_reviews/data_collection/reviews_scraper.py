@@ -1,4 +1,7 @@
-from yelp_reviews.data_collection.api_data import *
+from yelp_reviews.data_collection.api_data import (
+    all_restaurants,
+    parse_api_response
+)
 from bs4 import BeautifulSoup
 import json
 import requests
@@ -38,7 +41,6 @@ def extract_reviews(url):
     Retrieve the reviews on the first page for a single restaurant on Yelp
     Returns: reviews (list): list of reviews (max 20)
     """
-    api_url = url + "%3Fstart%3D40"
     html_obj = retrieve_html(url)[1]
     newest_20_reviews = parse_page(html_obj)
     return newest_20_reviews
@@ -51,7 +53,6 @@ def extract_all_restaurants_reviews(api_key, search_params):
     """
     restaurants = all_restaurants(api_key, search_params)
     restaurants_df = parse_api_response(restaurants)
-    num_of_restaurants = len(restaurants)
     restaurant_url_list = restaurants_df['url'].tolist()
     all_reviews = []
     reviewCount_list = []
@@ -64,19 +65,17 @@ def extract_all_restaurants_reviews(api_key, search_params):
 
 
 def write_data(api_key):
-    search_params={"term":"taco","location":"University District,Seattle", 
-                "categories": "restaurants"}
-    (all_reviews, reviewCount_list) = extract_all_restaurants_reviews(api_key,
-                                                                search_params)
-  
+    search_params = {"term": "taco", 
+                    "location": "University District,Seattle", 
+                    "categories": "restaurants"}
+    # L1 is all_reviews, L2 is reviewCount_list
+    (L1, L2) = extract_all_restaurants_reviews(api_key, search_params)
     # Opening the csv file in 'w' mode, write rows
     with open('./data/reviews.csv', 'w') as f:
         writer = csv.writer(f) 
-        writer.writerow(all_reviews)
+        writer.writerow(L1)
         f.close()
-    
     with open('./data/reviewCountOnPage.csv', 'w') as f:
         writer = csv.writer(f) 
-        writer.writerow(reviewCount_list)
+        writer.writerow(L2)
         f.close()
-
