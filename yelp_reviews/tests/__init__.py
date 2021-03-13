@@ -10,7 +10,7 @@ from yelp_reviews.data_collection.reviews_scraper import (
     extract_all_restaurants_reviews
 )
 
-from yelp_reviews.visualization.text_preprocessing import(
+from yelp_reviews.visualization.text_preprocessing import (
     read_all_reviews,
     read_all_reviews_seperately,
     get_latest_reviews,
