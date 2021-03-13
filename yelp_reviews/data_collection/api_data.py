@@ -48,7 +48,7 @@ def all_restaurants(api_key, params):
         data = yelp_search(api_key, params)
         result += data["businesses"]
         # Pause slightly between requests
-        time.sleep(.300)
+        time.sleep(.400)
     return result
 
 def parse_api_response(api_response):
