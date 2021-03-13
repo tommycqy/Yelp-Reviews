@@ -121,7 +121,7 @@ def preprocess(text, stopwords={},
                 continue
             else:
                 append_bool = True
-        if append_bool == True:
+        if append_bool:
             break_list.append(token)
 
     if break_list != []:
