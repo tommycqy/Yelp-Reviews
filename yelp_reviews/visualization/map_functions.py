@@ -1,17 +1,19 @@
 import numpy as np
 import pandas as pd
 import re
-from mapboxgl.utils import create_color_stops, df_to_geojson
+from mapboxgl.utils import df_to_geojson
 from mapboxgl.viz import CircleViz
+import yelp_reviews
 
-def get_map_df(file_path, params, from_api = False):
+
+def get_map_df(file_path, params, api_key, from_api=False):
     """
     Prepares the dataframe for the map, either from api or from csv
     Changes the latitude and longitude column name
     """
     if from_api:
-        api_key = read_api_key()
-        df = write_api_data(api_key, params)
+        path = yelp_reviews.write_api_data(api_key, params, file_path)
+        df = pd.read_csv(path)
     else:  
         df = pd.read_csv(file_path)
     df = df.rename(columns={"latitude": "lat", "longitude": "lon"})
@@ -67,7 +69,7 @@ def get_filter_indicator_df(df, filter_col, col_list):
     """
 
     df_indicator = get_indicators(df, filter_col)
-    df_filter = pd.DataFrame(columns = df_indicator.columns)
+    df_filter = pd.DataFrame(columns=df_indicator.columns)
 
     for col in col_list:
 
@@ -77,20 +79,29 @@ def get_filter_indicator_df(df, filter_col, col_list):
     return df_filter
 
 
-def get_viz(df):
+def get_viz(file_path, params=None, api_key=None, from_api=False, filter_col=None, target_list=None):
     """
     Converts dataframe to geoJSON
+    Takes either dataframe from filepath or from API request
     Then renders to MapBox map
+    Optional filtering based on column and target list
     Returns: MapBox map
     """
 
     access_token = 'pk.eyJ1IjoiZW1pOTAiLCJhIjoiY2tsaG9penkxMmY1cTJ2czZyNmQ5c3I2MCJ9.AaHgMWQdOv-SwzWj_nYvDg'
 
-    rest_json = df_to_geojson(df.fillna(''),
+    df = get_map_df(file_path=file_path, params=params, api_key=api_key, from_api=from_api)
+
+    if filter_col is not None:
+        df_map = get_filter_indicator_df(df, filter_col=filter_col, col_list=target_list)
+    else:
+        df_map = df
+
+    rest_json = df_to_geojson(df_map.fillna(''),
                               properties=['name', 'rating', 'price'],
                               precision=4)
 
-    df_center = get_center(df)
+    df_center = get_center(df_map)
 
     category_color_stops = [['$', 'rgb(211,47,47)'],
                             ['$$', 'rgb(81,45,168)'],

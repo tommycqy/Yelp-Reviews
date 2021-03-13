@@ -23,5 +23,6 @@ from yelp_reviews.visualization.map_functions import (
     get_center,
     get_map_df,
     get_indicators,
-    get_filter_indicator_df
+    get_filter_indicator_df,
+    get_viz
 )

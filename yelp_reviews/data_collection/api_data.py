@@ -72,7 +72,7 @@ def parse_api_response(api_response):
     return df_return
 
 
-def write_api_data(api_key, params, fileName):
+def write_api_data(api_key, params, file_name):
     """
     Write api data to pandas dataFrame and write to .csv file
     Default: filename as 'api_data.csv'
@@ -80,7 +80,7 @@ def write_api_data(api_key, params, fileName):
     """
     dir_name = os.path.dirname(yelp_reviews.__file__)
     dir_path = os.path.join(str(Path(dir_name).parents[0]), "data")
-    file_path = os.path.join(dir_path, fileName)
+    file_path = os.path.join(dir_path, file_name)
     api_response = all_restaurants(api_key, params=params)
     restaurants_df = parse_api_response(api_response)
     restaurants_df.to_csv(file_path)
