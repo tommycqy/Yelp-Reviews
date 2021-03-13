@@ -1,13 +1,12 @@
 import unittest
 import os
 from pathlib import Path
-from yelp_reviews.visualization.text_preprocessing import(
+from yelp_reviews.visualization.text_preprocessing import (
     read_all_reviews,
     read_all_reviews_seperately,
     get_latest_reviews,
     preprocess,
-    get_rare_words,
-    plot
+    get_rare_words
 )
 
 DIR_PATH = str(Path(os.getcwd()))
@@ -40,7 +39,7 @@ class TextPreprocssingTestCase(unittest.TestCase):
         # Punctuation and space handling
         self.assertEqual(preprocess(" a..a. .a . a."), ['a', 'a', 'a', 'a'])
         self.assertEqual(preprocess("word-of-mouth self-esteem"),
-                                    ['word', 'of', 'mouth', 'self', 'esteem'])
+                         ['word', 'of', 'mouth', 'self', 'esteem'])
 
         # Apostrophe handling
         self.assertEqual(preprocess("you've"), ['youve'])

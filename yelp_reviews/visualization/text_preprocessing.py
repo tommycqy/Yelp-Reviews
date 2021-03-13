@@ -14,10 +14,12 @@ def nltk_download():
     nltk.download('wordnet')
     nltk.download('punkt')
 
+
 nltk_download()
 
+
 def read_all_reviews(filepath):
-    """ 
+    """
     Read CSV file that contains all reviews into a string
     Returns:
         text (string)
@@ -80,7 +82,7 @@ def preprocess(text, stopwords={},
     args:
         text: str -- raw text
         stopwords : Set[str] -- lemmatized tokens to exclude from the output
-        lemmatizer : Lemmatizer -- 
+        lemmatizer : Lemmatizer --
             an instance of a class implementing the lemmatize() method
     Returns:
         list(str): tokenized text
@@ -110,10 +112,12 @@ def preprocess(text, stopwords={},
     for i in range(len(filtered_tokens)):
         append_bool = False
         token = filtered_tokens[i]
-        # Break tokens at all characters that are 
+        # Break tokens at all characters that are
         # not in string.ascii_letters or string.digits
         for c in token:
-            if (c in string.ascii_letters) or (c in string.digits):
+            if (c in string.ascii_letters):
+                continue
+            elif (c in string.digits):
                 continue
             else:
                 append_bool = True
