@@ -18,7 +18,7 @@ def yelp_search(api_key, params):
     """
     search_url = "https://api.yelp.com/v3/businesses/search"
     headers = {"Authorization": "Bearer %s" % api_key}
-    response = requests.get(search_url, params = params, headers = headers)
+    response = requests.get(search_url, params=params, headers=headers)
     data = json.loads(response.text)
     return data
 
@@ -65,14 +65,14 @@ def parse_api_response(api_response):
     df["category"] = category_list
     df["latitude"] = latitude
     df["longitude"] = longitude
-    df_return = df.drop(columns = ["coordinates", "image_url", 
-                                    "is_closed", "categories", 
-                                    "location", "display_phone", 
-                                    "distance"])
+    df_return = df.drop(columns=["coordinates", "image_url",
+                                 "is_closed", "categories",
+                                 "location", "display_phone",
+                                 "distance"])
     return df_return
 
 
-def write_api_data(api_key, params, fileName = 'api_data.csv'):
+def write_api_data(api_key, params, fileName):
     """
     Write api data to pandas dataFrame and write to .csv file
     Default: filename as 'api_data.csv'

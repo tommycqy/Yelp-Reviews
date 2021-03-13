@@ -65,17 +65,17 @@ def extract_all_restaurants_reviews(api_key, search_params):
 
 
 def write_data(api_key):
-    search_params = {"term": "taco", 
-                    "location": "University District,Seattle", 
-                    "categories": "restaurants"}
+    search_params = {"term": "taco",
+                     "location": "University District,Seattle",
+                     "categories": "restaurants"}
     # L1 is all_reviews, L2 is reviewCount_list
     (L1, L2) = extract_all_restaurants_reviews(api_key, search_params)
     # Opening the csv file in 'w' mode, write rows
     with open('./data/reviews.csv', 'w') as f:
-        writer = csv.writer(f) 
+        writer = csv.writer(f)
         writer.writerow(L1)
         f.close()
     with open('./data/reviewCountOnPage.csv', 'w') as f:
-        writer = csv.writer(f) 
+        writer = csv.writer(f)
         writer.writerow(L2)
         f.close()

@@ -1,12 +1,6 @@
 import unittest
 import os
-import pandas
-from bs4 import BeautifulSoup
 from pathlib import Path
-from yelp_reviews.data_collection.api_data import (
-    all_restaurants,
-    parse_api_response
-)
 from yelp_reviews.data_collection.reviews_scraper import (
     retrieve_html,
     parse_page,
@@ -18,8 +12,9 @@ DIR_PATH = str(Path(os.getcwd()))
 DATA_FOLDER = "yelp_reviews/tests/data"
 API_KEY = Path(os.path.join(DIR_PATH, DATA_FOLDER, "api_key.txt")).read_text()
 URL_PATH = Path(os.path.join(DIR_PATH, DATA_FOLDER, "url.txt"))
-HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data", 
-                                "test1.html"))
+HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data",
+                              "test1.html"))
+
 
 class WebScraperTestCase(unittest.TestCase):
     def test_scrape_page(self):
@@ -38,8 +33,9 @@ class WebScraperTestCase(unittest.TestCase):
         self.assertIsInstance(parse_page(html_obj), list, "is list")
 
         # Extract Reviews Test Case
-        test_reviews=extract_reviews(test_url)
-        self.assertTrue(len(test_reviews)<=20)
+        test_reviews = extract_reviews(test_url)
+        self.assertTrue(len(test_reviews) <= 20)
+
 
 if __name__ == '__main__':
     unittest.main()
