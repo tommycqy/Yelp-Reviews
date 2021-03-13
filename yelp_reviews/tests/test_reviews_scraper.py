@@ -24,7 +24,7 @@ class WebScraperTestCase(unittest.TestCase):
         # Retrieve HTML Test Case
         with open(URL_PATH, 'r') as file:
             for line in file:
-                test_url = line
+                test_url = line.strip()
         (status_code, html_obj) = retrieve_html(test_url)
         self.assertEqual(status_code, 200)
 
