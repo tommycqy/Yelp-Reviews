@@ -79,7 +79,7 @@ def write_api_data(api_key, params, fileName):
     File will be saved in separate 'Data' folder
     """
     dir_name = os.path.dirname(yelp_reviews.__file__)
-    dir_path = os.path.join(str(Path(dir_name).parents[0]),"data")
+    dir_path = os.path.join(str(Path(dir_name).parents[0]), "data")
     file_path = os.path.join(dir_path, fileName)
     api_response = all_restaurants(api_key, params=params)
     restaurants_df = parse_api_response(api_response)

@@ -46,16 +46,16 @@ class APIDataTestCase(unittest.TestCase):
         self.assertEqual(test_business['rating'], 5.0)
 
         # All Restaurants Test Case
-        tacos = all_restaurants(API_KEY,params)
+        tacos = all_restaurants(API_KEY, params)
         taco_restaurants_df = parse_api_response(tacos)
         self.assertEqual(len(tacos), len(taco_restaurants_df))
-        self.assertEqual(taco_restaurants_df.shape, (156,12))
+        self.assertEqual(taco_restaurants_df.shape, (156, 12))
 
         """
             TEST FOR A SINGLE ROW:
-            Using a particular restaurant url 
+            Using a particular restaurant url
                 to check if all the rows in the dataframe are correct:
-            Scope: If we want to check for any other cases , 
+            Scope: If we want to check for any other cases,
                 need to change the url as test data needed is hardcoded.
         """
         with open(URL_PATH, 'r') as file:
@@ -65,7 +65,8 @@ class APIDataTestCase(unittest.TestCase):
         with open(DF_PATH, 'r') as file:
             for line in file:
                 df_list.append(line.strip())
-        TNT_Taqueria = taco_restaurants_df.loc[taco_restaurants_df['url']==url]
+        t_df = taco_restaurants_df
+        TNT_Taqueria = t_df.loc[t_df['url'] == url]
         rating_value = df_list[2]
         self.assertEqual(TNT_Taqueria.iloc[0]['name'], df_list[0])
         self.assertEqual(TNT_Taqueria.iloc[0]['price'], df_list[1])

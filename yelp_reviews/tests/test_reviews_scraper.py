@@ -4,8 +4,7 @@ from pathlib import Path
 from yelp_reviews.data_collection.reviews_scraper import (
     retrieve_html,
     parse_page,
-    extract_reviews,
-    extract_all_restaurants_reviews
+    extract_reviews
 )
 
 DIR_PATH = str(Path(os.getcwd()))
