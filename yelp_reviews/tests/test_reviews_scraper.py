@@ -8,7 +8,7 @@ from yelp_reviews.data_collection.reviews_scraper import (
 )
 
 DIR_PATH = str(Path(os.getcwd()))
-DATA_FOLDER = "yelp_reviews/tests/data"
+DATA_FOLDER = "data"
 API_KEY = Path(os.path.join(DIR_PATH, DATA_FOLDER, "api_key.txt")).read_text()
 URL_PATH = Path(os.path.join(DIR_PATH, DATA_FOLDER, "url.txt"))
 HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data",

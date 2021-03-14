@@ -10,7 +10,7 @@ from yelp_reviews.visualization.text_preprocessing import (
 )
 
 DIR_PATH = str(Path(os.getcwd()))
-DATA_FOLDER = "yelp_reviews/tests/data"
+DATA_FOLDER = "data"
 
 
 class TextPreprocssingTestCase(unittest.TestCase):
