@@ -14,7 +14,7 @@ Change the file if need to test for other cases.
 '''
 
 DIR_PATH = str(Path(os.getcwd()))
-DATA_FOLDER = "data"
+DATA_FOLDER = "yelp_reviews/tests/data"
 API_KEY = Path(os.path.join(DIR_PATH, DATA_FOLDER, "api_key.txt")).read_text()
 PARAM_PATH = Path(os.path.join(DIR_PATH, DATA_FOLDER, "params.txt"))
 URL_PATH = Path(os.path.join(DIR_PATH, DATA_FOLDER, "url.txt"))
