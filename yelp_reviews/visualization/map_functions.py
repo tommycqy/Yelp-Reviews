@@ -14,7 +14,7 @@ def get_map_df(file_path, params=None, api_key=None, from_api=False):
     if from_api:
         path = yelp_reviews.write_api_data(api_key, params, file_path)
         df = pd.read_csv(path)
-    else:  
+    else:
         df = pd.read_csv(file_path)
     df = df.rename(columns={"latitude": "lat", "longitude": "lon"})
     df["name"] = df["name"].str.replace("'", "")
@@ -41,7 +41,8 @@ def get_indicators(df, col_name):
     --> Get indicator column for "delivery", "pickup"
     Returns: appended dataframe
     """
-    split_column = df[col_name].apply(lambda x: re.sub('[^A-Za-z0-9,_]+', '', x).split(","))
+    split_column = df[col_name].apply(lambda x: re.sub('[^A-Za-z0-9,_]+', '', x)
+                                      .split(","))
     temp_df = pd.DataFrame(data=split_column)
     split_df = temp_df[col_name].apply(pd.Series)
 
@@ -50,7 +51,9 @@ def get_indicators(df, col_name):
     for col in split_df.columns:
         col_list.append(list(split_df[col].unique()))
 
-    flat_list = list(set([trans for sublist in col_list for trans in sublist if trans not in [np.nan, ""]]))
+    flat_list = list(set(
+        [trans for sublist in col_list for trans in sublist if trans not in [np.nan, ""]])
+    )
 
     df_t = split_df.transpose()
 
@@ -79,7 +82,8 @@ def get_filter_indicator_df(df, filter_col, col_list):
     return df_filter
 
 
-def get_viz(file_path, params=None, api_key=None, from_api=False, filter_col=None, target_list=None):
+def get_viz(file_path, params=None, api_key=None,
+            from_api=False, filter_col=None, target_list=None):
     """
     Converts dataframe to geoJSON
     Takes either dataframe from filepath or from API request
@@ -88,12 +92,16 @@ def get_viz(file_path, params=None, api_key=None, from_api=False, filter_col=Non
     Returns: MapBox map
     """
 
-    access_token = 'pk.eyJ1IjoiZW1pOTAiLCJhIjoiY2tsaG9penkxMmY1cTJ2czZyNmQ5c3I2MCJ9.AaHgMWQdOv-SwzWj_nYvDg'
+    access_token = \
+        'pk.eyJ1IjoiZW1pOTAiLCJhIjoiY2tsaG9penkx' \
+        'MmY1cTJ2czZyNmQ5c3I2MCJ9.AaHgMWQdOv-SwzWj_nYvDg'
 
-    df = get_map_df(file_path=file_path, params=params, api_key=api_key, from_api=from_api)
+    df = get_map_df(file_path=file_path,
+                    params=params, api_key=api_key, from_api=from_api)
 
     if filter_col is not None:
-        df_map = get_filter_indicator_df(df, filter_col=filter_col, col_list=target_list)
+        df_map = get_filter_indicator_df(
+            df, filter_col=filter_col, col_list=target_list)
     else:
         df_map = df
 

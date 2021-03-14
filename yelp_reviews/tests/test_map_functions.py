@@ -52,9 +52,10 @@ class MapFunctionsTestCase(unittest.TestCase):
         """
 
         df = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
-        df_indicators = get_indicators(df, "transactions")
-        transactions = ["pickup"]
-        df_filter = get_filter_indicator_df(df_indicators, "transactions", transactions)
+        ind = "transactions"
+        df_indicators = get_indicators(df, ind)
+        col = ["pickup"]
+        df_filter = get_filter_indicator_df(df_indicators, ind, col)
         self.assertEqual(df_filter.pickup.min(), 1)
 
     def test_get_viz(self):
@@ -66,7 +67,6 @@ class MapFunctionsTestCase(unittest.TestCase):
         data1 = viz.data[0]
         df_data = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
         self.assertEqual(data1["properties"]["name"], df_data["name"][0])
-
 
 
 if __name__ == '__main__':
