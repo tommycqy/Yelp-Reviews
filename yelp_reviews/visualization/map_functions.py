@@ -6,7 +6,7 @@ from mapboxgl.viz import CircleViz
 import yelp_reviews
 
 
-def get_map_df(file_path, params, api_key, from_api=False):
+def get_map_df(file_path, params=None, api_key=None, from_api=False):
     """
     Prepares the dataframe for the map, either from api or from csv
     Changes the latitude and longitude column name

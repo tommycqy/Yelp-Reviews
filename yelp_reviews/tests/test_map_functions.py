@@ -1,8 +1,7 @@
 import unittest
 import os
-import pandas
 from pathlib import Path
-from yelp_reviews.visualization.map_functions import(
+from yelp_reviews.visualization.map_functions import (
     get_map_df,
     get_center,
     get_indicators,
@@ -11,21 +10,64 @@ from yelp_reviews.visualization.map_functions import(
 )
 
 DIR_PATH = str(Path(os.getcwd()))
-DATA_FOLDER = "yelp_reviews/tests/data"
+DATA_FOLDER = "data"
 API_KEY = Path(os.path.join(DIR_PATH, DATA_FOLDER, "api_key.txt")).read_text()
 URL_PATH = Path(os.path.join(DIR_PATH, DATA_FOLDER, "url.txt"))
-HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data", 
-                                "test1.html"))
+HTML_PATH = Path(os.path.join(DIR_PATH, "yelp_reviews/tests/data",
+                              "test1.html"))
+
 
 class MapFunctionsTestCase(unittest.TestCase):
-    def test_map_functions(self):
+    def test_map_center(self):
         """
-           TEST Map FUNCTIONS:
-           To check if the the visualization is correctly generated
+        Test: if returned coordinates is close to UW coordinates
         """
-        # Get Map DataFrame Test Case
-        self.assertEqual(True, True)
+
+        df_map = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        center = get_center(df_map)
+        uw_coord = [-122.3038, 47.6498]
+        self.assertAlmostEqual(round(center[0], 1), round(uw_coord[0], 1))
+
+    def test_get_map_df(self):
+        """
+        Test: if returned dataframe includes column "lat"
+        """
+
+        df_map = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        cols = list(df_map.columns)
+        self.assertTrue("lat" in cols)
+
+    def test_get_indicators(self):
+        """
+        Test: if returned dataframe includes indicators
+        """
+
+        df = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        df_indicators = get_indicators(df, "transactions")
+        self.assertEqual(df_indicators.pickup.max(), 1)
+
+    def test_get_filter_indicator_df(self):
+        """
+        Test: if all indicators filtered is True
+        """
+
+        df = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        df_indicators = get_indicators(df, "transactions")
+        transactions = ["pickup"]
+        df_filter = get_filter_indicator_df(df_indicators, "transactions", transactions)
+        self.assertEqual(df_filter.pickup.min(), 1)
+
+    def test_get_viz(self):
+        """
+        Test: if mapbox map rendered from the correct dataset
+        """
+
+        viz = get_viz(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        data1 = viz.data[0]
+        df_data = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        self.assertEqual(data1["properties"]["name"], df_data["name"][0])
+
+
 
 if __name__ == '__main__':
     unittest.main()
-    
