@@ -41,8 +41,8 @@ def get_indicators(df, col_name):
     --> Get indicator column for "delivery", "pickup"
     Returns: appended dataframe
     """
-    split_column = df[col_name].apply(lambda x: re.sub('[^A-Za-z0-9,_]+', '', x)
-                                      .split(","))
+    split_column = df[col_name].apply(
+        lambda x: re.sub('[^A-Za-z0-9,_]+', '', x).split(","))
     temp_df = pd.DataFrame(data=split_column)
     split_df = temp_df[col_name].apply(pd.Series)
 
@@ -52,7 +52,8 @@ def get_indicators(df, col_name):
         col_list.append(list(split_df[col].unique()))
 
     flat_list = list(set(
-        [trans for sublist in col_list for trans in sublist if trans not in [np.nan, ""]])
+        [trans for sublist in col_list for trans in sublist
+         if trans not in [np.nan, ""]])
     )
 
     df_t = split_df.transpose()
