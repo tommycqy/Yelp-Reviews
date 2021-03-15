@@ -156,20 +156,3 @@ def get_rare_words(tokens):
             result.append(key)
 
     return set(result)
-
-
-def plot():
-    text = read_all_reviews()
-    extra_stopwords = set()
-    SW = set(nltk.corpus.stopwords.words('english'))
-    stopwords = SW | set(["http", "co", "rt", "amp"]) | extra_stopwords
-    tokens = preprocess(text, stopwords)
-    distribution = collections.Counter(tokens)
-    plt.hist(distribution.values(), bins=100)
-    plt.yscale('log')
-    plt.savefig('yelp_reviews/visualization/word_distribution.png')
-
-    rare_words_set = get_rare_words(distribution)
-    print(len(rare_words_set))
-
-# plot()

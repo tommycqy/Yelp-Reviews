@@ -6,6 +6,7 @@ from yelp_reviews.visualization.map_functions import (
     get_center,
     get_indicators,
     get_filter_indicator_df,
+    get_filter_df,
     get_viz
 )
 
@@ -57,6 +58,14 @@ class MapFunctionsTestCase(unittest.TestCase):
         col = ["pickup"]
         df_filter = get_filter_indicator_df(df_indicators, ind, col)
         self.assertEqual(df_filter.pickup.min(), 1)
+
+    def test_get_filter_df(self):
+        """
+        Test: if filtered df filters based on logic
+        """
+        df_map = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
+        df_filter = get_filter_df(df_map, "price", "$")
+        self.assertEqual(len(df_filter), 40)
 
     def test_get_viz(self):
         """

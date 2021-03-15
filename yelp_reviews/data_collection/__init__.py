@@ -16,7 +16,6 @@ from yelp_reviews.visualization.text_preprocessing import (
     get_latest_reviews,
     preprocess,
     get_rare_words,
-    plot
 )
 
 from yelp_reviews.visualization.map_functions import (
@@ -24,6 +23,7 @@ from yelp_reviews.visualization.map_functions import (
     get_map_df,
     get_indicators,
     get_filter_indicator_df,
+    get_filter_df,
     get_viz
 )
 
@@ -39,9 +39,9 @@ __all__ = ['yelp_search',
            'get_latest_reviews',
            'preprocess',
            'get_rare_words',
-           'plot',
            'get_center',
            'get_map_df',
            'get_indicators',
            'get_filter_indicator_df',
+           'get_filter_df',
            'get_viz']

@@ -18,6 +18,8 @@ def get_map_df(file_path, params=None, api_key=None, from_api=False):
         df = pd.read_csv(file_path)
     df = df.rename(columns={"latitude": "lat", "longitude": "lon"})
     df["name"] = df["name"].str.replace("'", "")
+    df["transactions"] = df["transactions"].str.replace("'", "")
+
     return df
 
 
@@ -83,8 +85,27 @@ def get_filter_indicator_df(df, filter_col, col_list):
     return df_filter
 
 
+def get_filter_df(df, filter_col, targets, greater_than=True):
+    """
+    Filter dataframe based on target column
+    Returns dataframe
+    """
+
+    if filter_col in ["transactions", "categories"]:
+        df_filter = get_filter_indicator_df(df, filter_col, targets)
+    elif filter_col == "rating":
+        if greater_than:
+            df_filter = df.loc[df[filter_col] >= targets]
+        else:
+            df_filter = df.loc[df[filter_col] <= targets]
+    else:
+        df_filter = df.loc[df[filter_col] == targets]
+
+    return df_filter
+
+
 def get_viz(file_path, params=None, api_key=None,
-            from_api=False, filter_col=None, target_list=None):
+            from_api=False, filter_col=None, target=None, g_than=True):
     """
     Converts dataframe to geoJSON
     Takes either dataframe from filepath or from API request
@@ -101,13 +122,14 @@ def get_viz(file_path, params=None, api_key=None,
                     params=params, api_key=api_key, from_api=from_api)
 
     if filter_col is not None:
-        df_map = get_filter_indicator_df(
-            df, filter_col=filter_col, col_list=target_list)
+        df_map = get_filter_df(
+            df, filter_col=filter_col, targets=target, greater_than=g_than)
     else:
         df_map = df
 
+    property_list = ['name', 'rating', 'price', 'category', 'transactions']
     rest_json = df_to_geojson(df_map.fillna(''),
-                              properties=['name', 'rating', 'price'],
+                              properties=property_list,
                               precision=4)
 
     df_center = get_center(df_map)
