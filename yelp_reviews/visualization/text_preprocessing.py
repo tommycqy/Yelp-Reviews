@@ -3,7 +3,6 @@ import collections
 import csv
 import string
 import re
-import matplotlib.pyplot as plt
 
 
 def nltk_download():
