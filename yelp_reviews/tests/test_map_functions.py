@@ -65,7 +65,7 @@ class MapFunctionsTestCase(unittest.TestCase):
         """
         df_map = get_map_df(os.path.join(DATA_FOLDER, "test_map_df.csv"))
         df_filter = get_filter_df(df_map, "price", "$")
-        self.assertEqual(len(df_filter), 40)
+        self.assertEqual(len(df_filter), 172)
 
     def test_get_viz(self):
         """
