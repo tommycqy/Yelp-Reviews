@@ -91,7 +91,7 @@ def get_filter_df(df, filter_col, targets, greater_than=True):
     Returns dataframe
     """
 
-    if filter_col in ["transactions", "categories"]:
+    if filter_col in ["transactions", "category"]:
         df_filter = get_filter_indicator_df(df, filter_col, targets)
     elif filter_col == "rating":
         if greater_than:
