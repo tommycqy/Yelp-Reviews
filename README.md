@@ -2,7 +2,7 @@
 
 ## Introduction 
 
-The goal of this project is to use the yelp data to get Yelp reviews, rating, price,location of different categories of restaurants like  'Tacos' and build a visualization app that allows for easy filtering of rating, price and category.Also, we wanted to see what else we can extraxt from the text data. The Yelp data  needed is obtained from both the Yelp Fusion API and the web scraper that we implemented. 
+The goal of this project is to use yelp data to get Yelp reviews, ratings, price, location of different categories of restaurants like 'Tacos' and build a visualization app that allows for easy filtering of rating, price, and category. Also, we wanted to see what else we can extract from the text data. The Yelp data needed is obtained from both the Yelp Fusion API and the web scraper that we implemented. 
 
 
 
