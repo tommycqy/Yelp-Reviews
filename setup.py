@@ -15,6 +15,8 @@ AUTHOR = "Tommy Chen | Emily Yamauchi| Sindhu Madhadi"
 AUTHOR_EMAIL = "qingyuc@uw.edu, eyamauch@uw.edu, sindhu09@uw.edu"
 PLATFORMS = "Linux, Windows and MacOS"
 VERSION = "__version__ 1.0"
+REQUIRES = ["numpy", "pandas", "requests",
+            "bs4", "nltk", "mapboxgl"]
 
 opts = dict(name=NAME,
             description=DESCRIPTION,
@@ -24,7 +26,9 @@ opts = dict(name=NAME,
             author_email=AUTHOR_EMAIL,
             platforms=PLATFORMS,
             version=VERSION,
-            packages=PACKAGES)
+            packages=PACKAGES,
+            install_requires=REQUIRES,
+            requires=REQUIRES)
 
 
 if __name__ == '__main__':
