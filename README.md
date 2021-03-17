@@ -1,9 +1,31 @@
-# Yelp Reviews 
+# DATA515L Yelp Reviews
 
 
 ## Introduction 
 
-The goal of this project is to use yelp data to get Yelp reviews, ratings, price, location of different categories of restaurants like 'Tacos' and build a visualization app that allows for easy filtering of rating, price, and category. Also, we wanted to see what else we can extract from the text data. The Yelp data needed is obtained from both the Yelp Fusion API and the web scraper that we implemented. 
+### Objective
+
+Yelp search does not allow for simple filtered search by ratings- can we build an intuitive, interactive map that allows users to search for restaurants given a ratings range? 
+
+Further, given Yelp's rich text data, what sort of insights can be gained from their reviews?  
+
+- Can ratings be predicted from review text?
+- Can we extract keywords from the reviews?
+- How accurate are the restaurant searches? (A search for "tacos" in Seattle returns restaurants that aren't even marginally related to tacos, for example"
+
+The objective of this project is to use the Yelp Fusion API to get restaurant data such as location, price, restaurant category, as well as user reviews, to build a visualization app that allows for simple filtering. 
+
+### Data and Packages Used
+
+
+
+| Package      | Description |
+| :----------- | :----------- |
+| Yelp Fusion API    | Restaurant Data based on search parameters (location, price, category, etc).       |
+| BeautifulSoup   | Scrape/Parse user reviews of restaurant based on URL returned from API call        |
+| NLTK   | Text processing of review text data     |
+| MapBox   | Process coordinate data and convert to geoJSON format, render map visualization|
+
 
 
 ## Components
