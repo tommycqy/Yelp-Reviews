@@ -1,4 +1,4 @@
-# DATA515L Yelp Reviews
+# DATA515 Yelp Reviews
 
 
 ## Introduction 
@@ -15,7 +15,7 @@ Further, given Yelp's rich text data, what sort of insights can be gained from t
 
 The objective of this project is to use the Yelp Fusion API to get restaurant data such as location, price, restaurant category, as well as user reviews, to build a visualization app that allows for simple filtering. 
 
-### Data and Packages Used
+### Data and Packages 
 
 
 
@@ -39,7 +39,7 @@ Using the “URL” from the above DataFrame, scrape latest 20 reviews for the s
 
 **Data visualization map** \
 Using the coordinate data from the above DataFrame, plot restaurants in a map visualization. \
-Filter returned map coordinates by price, category, transaction, rating \
+Filter returned map coordinates by price, category, transaction, rating 
 
 **Data visualization for text reviews** \
 Using web scraper function to extract the text reviews on the first webpage of each restaurant. \
@@ -113,7 +113,7 @@ Return visualizations for the text reviews including a distribution plot and a w
 To install and use YelpReviews, you can follow the below steps.
 
 **Clone the repository**: \
-git clone https://github.com/tommycqy/Yelp-Reviews.git
+```git clone https://github.com/tommycqy/Yelp-Reviews.git```
 
 **Run the Python Modules from the Root Directory**: \
 For Testing: \
