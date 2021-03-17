@@ -9,22 +9,25 @@ The goal of this project is to use yelp data to get Yelp reviews, ratings, price
 ## Components
 
 **.** Data collection and parsing tool using Yelp Fusion API
-        Return JSON file of restaurant meeting criteria based on search parameters
-        Read JSON file to a pandas DataFrame, keeping just relevant data points (as specified in above “Data” section). 
+        Return JSON file of restaurant meeting criteria based on search parameters.
+        Read JSON file to a pandas DataFrame, keeping just relevant data points (as specified in above “Data” section).
+
 **.** Web scraper for the 20 newest reviews
-        Using the “URL” from the above DataFrame, scrape latest 20 reviews for the selected restaurant, and returns list of the reivews
+        Using the “URL” from the above DataFrame, scrape latest 20 reviews for the selected restaurant, and returns list of the reivews.
+
 **.** Data visualization map
-        Using the coordinate data from the above DataFrame, plot restaurants in a map visualization 
+        Using the coordinate data from the above DataFrame, plot restaurants in a map visualization.
         TBD: Interactive visualization allowing filtering by category, price range, rating
         TBD: Other visualization components in tooltip, showing review text data for each restaurant
         TBD: Show separately distribution of ratings based on restaurants displayed in map
+
 **.** Data visualization for text reviews
-        Using web scraper function to extract the text reviews on the first webpage of each restaurant
+        Using web scraper function to extract the text reviews on the first webpage of each restaurant.
         Preprocess the reviews using following steps:
             (Lowercase, URL removing (re.sub), Remove trailing ’s’ and apostrophe, Tokenize, 
             Remove punctuations (include white space), Break tokens on non-alpha-numeric values, 
             Lemmatize, Remove stop words (nltk.stopwords (English) and self-defined extra stop-words))
-        Return a visualization for the text review (word cloud). TBD
+        Return a visualization for the text review (word cloud).
 
 
 ## Project folder structure
@@ -84,9 +87,17 @@ To install and use YelpReviews, you can follow the below steps.
 
 **Clone the repository**: git clone https://github.com/tommycqy/Yelp-Reviews.git
 
-**Change the Directory**: cd yelp_reviews
+**Run the Python Modules from the Root Directory**: 
+    For Testing:
+        python3 -m yelp_reviews.tests.test_api_data
+        python3 -m yelp_reviews.tests.test_text_preprocessing
+    
+    For Running a Single Module:
+        python3 -m yelp_reviews.data_collection.api_data
 
 **Install setup.py**: python setup.py install
+
+**Install requirements.txt**: pip3 install -r requirements.txt
 
 
 ## Limitations
