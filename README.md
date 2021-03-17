@@ -110,7 +110,7 @@ Return visualizations for the text reviews including a distribution plot and a w
 
 ## Installation
 
-To install and use YelpReviews, you can follow the below steps.
+To install and use Yelp-Reviews, you can follow the below steps.
 
 **Clone the repository**: \
 ```git clone https://github.com/tommycqy/Yelp-Reviews.git```
