@@ -11,7 +11,7 @@ Further, given Yelp's rich text data, what sort of insights can be gained from t
 
 - Can ratings be predicted from review text?
 - Can we extract keywords from the reviews?
-- How accurate are the restaurant searches? (A search for "tacos" in Seattle returns restaurants that aren't even marginally related to tacos, for example"
+- How accurate are the restaurant searches? (A search for "tacos" in Seattle returns restaurants that aren't even marginally related to tacos, for example)
 
 The objective of this project is to use the Yelp Fusion API to get restaurant data such as location, price, restaurant category, as well as user reviews, to build a visualization app that allows for simple filtering. 
 
@@ -39,9 +39,7 @@ Using the “URL” from the above DataFrame, scrape latest 20 reviews for the s
 
 **Data visualization map** \
 Using the coordinate data from the above DataFrame, plot restaurants in a map visualization. \
-TBD: Interactive visualization allowing filtering by category, price range, rating \
-TBD: Other visualization components in tooltip, showing review text data for each restaurant \
-TBD: Show separately distribution of ratings based on restaurants displayed in map
+Filter returned map coordinates by price, category, transaction, rating \
 
 **Data visualization for text reviews** \
 Using web scraper function to extract the text reviews on the first webpage of each restaurant. \
@@ -135,3 +133,17 @@ For Running a Single Module: \
 ## Limitations
 
 Yelp API has many limitations. It only returns 20 results for a single request and returns up to 1000 businesses for the same search query. It also has a limited request rate. To resolve this issue,we implemented a web scraper using the Requests package to retrieve HTML from url and the Beautiful Soup package to parse the HTML. The resulting scraper would find all the JSON-formatted objects within the HTML and extract all 20 reviews on the first page of the business website.
+
+
+## Next Steps
+
+#### Visualization
+
+- Interactive visualization allowing filtering by category, price range, rating \
+- Other visualization components in tooltip, showing review text data for each restaurant \
+- Show separately distribution of ratings based on restaurants displayed in map \
+
+#### Machine Learning/Text Processing
+
+- Train a model to predict restaurant rating based on user reviews
+- Extract keywords of the restaurant based on review text 
