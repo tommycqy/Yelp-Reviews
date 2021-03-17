@@ -65,40 +65,40 @@ Return visualizations for the text reviews including a distribution plot and a w
     ├── LICENSE
     ├── README.md
     ├── data
-    │   ├── api_data.csv
-    │   ├── api_data_tacos.csv
-    │   ├── reviewCountOnPage.csv
-    │   └── reviews.csv
+    │   ├── api_data.csv
+    │   ├── api_data_tacos.csv
+    │   ├── reviewCountOnPage.csv
+    │   └── reviews.csv
     ├── docs
-    │   └── Design Document.pdf
+    │   └── Design Document.pdf
     ├── examples
-    │   ├── mapbox_viz.ipynb
-    │   └── scraper-demo.ipynb
+    │   ├── mapbox_viz.ipynb
+    │   └── scraper-demo.ipynb
     ├── requirements.txt
     ├── setup.py
     └── yelp_reviews
         ├── __init__.py
         ├── api_key.txt
         ├── data_collection
-        │   ├── __init__.py
-        │   ├── api_data.py
-        │   └── reviews_scraper.py
+        │   ├── __init__.py
+        │   ├── api_data.py
+        │   └── reviews_scraper.py
         ├── tests
-        │   ├── __init__.py
-        │   ├── data
-        │   │   ├── api_key.txt
-        │   │   ├── dataframe.txt
-        │   │   ├── mini_reviews.csv
-        │   │   ├── params.txt
-        │   │   ├── test1.html
-        │   │   ├── test_map_df.csv
-        │   │   ├── test_reviewCount.csv
-        │   │   ├── test_reviews.csv
-        │   │   └── url.txt
-        │   ├── test_api_data.py
-        │   ├── test_map_functions.py
-        │   ├── test_reviews_scraper.py
-        │   └── test_text_preprocessing.py
+        │   ├── __init__.py
+        │   ├── data
+        │   │   ├── api_key.txt
+        │   │   ├── dataframe.txt
+        │   │   ├── mini_reviews.csv
+        │   │   ├── params.txt
+        │   │   ├── test1.html
+        │   │   ├── test_map_df.csv
+        │   │   ├── test_reviewCount.csv
+        │   │   ├── test_reviews.csv
+        │   │   └── url.txt
+        │   ├── test_api_data.py
+        │   ├── test_map_functions.py
+        │   ├── test_reviews_scraper.py
+        │   └── test_text_preprocessing.py
         └── visualization
             ├── __init__.py
             ├── map_functions.py
