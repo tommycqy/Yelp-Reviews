@@ -52,7 +52,7 @@ Preprocess the reviews using following steps:
 5. Remove Punctuations (including white space)
 6. Break Tokens on Non-alpha-numeric Values
 7. Lemmatize the Tokens
-8. Remove stopwords(NLTK.stopwords (English) and Self-Defined Extra Stopwords) 
+8. Remove stopwords (NLTK.stopwords (english) and self-defined extra stopwords) 
 
 Return visualizations for the text reviews including a distribution plot and a wordcloud plot.
 
@@ -139,9 +139,9 @@ Yelp API has many limitations. It only returns 20 results for a single request a
 
 #### Visualization
 
-- Interactive visualization allowing filtering by category, price range, rating \
-- Other visualization components in tooltip, showing review text data for each restaurant \
-- Show separately distribution of ratings based on restaurants displayed in map \
+- Interactive visualization allowing filtering by category, price range, rating 
+- Other visualization components in tooltip, showing review text data for each restaurant 
+- Show separately distribution of ratings based on restaurants displayed in map 
 
 #### Machine Learning/Text Processing
 
