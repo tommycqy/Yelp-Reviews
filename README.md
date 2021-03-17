@@ -24,9 +24,9 @@ TBD: Show separately distribution of ratings based on restaurants displayed in m
 **Data visualization for text reviews** \
 Using web scraper function to extract the text reviews on the first webpage of each restaurant. \
 Preprocess the reviews using following steps: \
-&nbsp;&nbsp;(Lowercase, URL removing (re.sub), Remove trailing ’s’ and apostrophe, Tokenize, \
-&nbsp;&nbsp;Remove punctuations (include white space), Break tokens on non-alpha-numeric values, \
-&nbsp;&nbsp;Lemmatize, Remove stop words (nltk.stopwords (English) and self-defined extra stop-words)) \
+Lowercase, URL removing, Remove trailing ’s’ and apostrophe, Tokenize, 
+Remove punctuations (include white space), Break tokens on non-alpha-numeric values, 
+Lemmatize, Remove stopwords(nltk.stopwords (English) and self-defined extra stopwords) \
 Return a visualization for the text review (word cloud).
 
 
