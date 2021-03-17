@@ -9,25 +9,32 @@ The goal of this project is to use yelp data to get Yelp reviews, ratings, price
 ## Components
 
 **Data collection and parsing tool using Yelp Fusion API** \
-Return JSON file of restaurant meeting criteria based on search parameters.
+Return JSON file of restaurant meeting criteria based on search parameters. \
 Read JSON file to a pandas DataFrame, keeping just relevant data points (as specified in above “Data” section).
 
 **Web scraper for the 20 newest reviews** \
 Using the “URL” from the above DataFrame, scrape latest 20 reviews for the selected restaurant, and returns list of the reivews.
 
 **Data visualization map** \
-Using the coordinate data from the above DataFrame, plot restaurants in a map visualization.
-TBD: Interactive visualization allowing filtering by category, price range, rating
-TBD: Other visualization components in tooltip, showing review text data for each restaurant
+Using the coordinate data from the above DataFrame, plot restaurants in a map visualization. \
+TBD: Interactive visualization allowing filtering by category, price range, rating \
+TBD: Other visualization components in tooltip, showing review text data for each restaurant \
 TBD: Show separately distribution of ratings based on restaurants displayed in map
 
 **Data visualization for text reviews** \
 Using web scraper function to extract the text reviews on the first webpage of each restaurant. \
-Preprocess the reviews using following steps: \
-Lowercase, URL removing, Remove trailing ’s’ and apostrophe, Tokenize, 
-Remove punctuations (include white space), Break tokens on non-alpha-numeric values, 
-Lemmatize, Remove stopwords(nltk.stopwords (English) and self-defined extra stopwords) \
-Return a visualization for the text review (word cloud).
+Preprocess the reviews using following steps:
+
+1. Lowercase
+2. Remove URL
+3. Remove Trailing ’s’ and Apostrophe
+4. Tokenize Text (NLTK.word_tokenize)
+5. Remove Punctuations (including white space)
+6. Break Tokens on Non-alpha-numeric Values
+7. Lemmatize the Tokens
+8. Remove stopwords(NLTK.stopwords (English) and Self-Defined Extra Stopwords) 
+
+Return visualizations for the text reviews including a distribution plot and a wordcloud plot.
 
 
 ## Project folder structure
