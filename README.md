@@ -57,7 +57,7 @@ Preprocess the reviews using following steps:
 Return visualizations for the text reviews including a distribution plot and a wordcloud plot.
 
 
-## Project folder structure
+## Project Folder Structure
 
 ```
 
