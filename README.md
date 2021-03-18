@@ -1,3 +1,6 @@
+* Note to instructors: if contact person is needed for operational support, please kindly contact Tommy Chen at qingyuc@uw.edu or Emily Yamauchi at eyamauch@uw.edu. *
+---
+
 # DATA515 Yelp Reviews
 
 
